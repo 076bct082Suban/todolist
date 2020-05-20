@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    {{user.username}}
+    <button ><a href="{% url 'users:logout' %}">Logout</a></button>
+    {% for todolist in todolists %}
+        <h1>{{todolist}}</h1>
+        <br>
+        {% for todo in todolist.todo_set.all %}
+            {{todo}}
+        {% endfor %}
+        <br>
+    {% endfor %}
+</body>
+</html>

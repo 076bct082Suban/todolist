@@ -1,0 +1,18 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+Login   
+{% endblock title %}
+
+{% block body %}
+
+<form action="{% url 'users:login_conform' %}" method="POST">
+    {% csrf_token %}
+    {{message}} <br>
+    <label for="username">Usernname</label><br>
+    <input type="text" name="username"><br>
+    <label for="password">Password</label><br>
+    <input type="password" name="password"><br>
+    <input type="submit" value="Login">
+</form>
+{% endblock body %}
