@@ -14,7 +14,18 @@
         {% for todo in todolist.todo_set.all %}
             {{todo}}
         {% endfor %}
+        <form action="">
+            <label for="new_todo">New Todo</label>
+            <input type="text" name="new_todo" id='new_todo'>
+            <button id="new_todo_submit">Add</button>
+        </form>
         <br>
     {% endfor %}
+    <form action="">
+        <label for="new_todolist">New Todolist</label>
+        <input type="text" name="new_todolist" id='new_todolist'>
+        <button id="new_todolist_submit">Add</button>
+    </form>
+
 </body>
 </html>

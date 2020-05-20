@@ -6,7 +6,8 @@ from .models import Todolist, Todo
 
 # Create your views here.
 def home_view(request):
-    todolists = Todolist.objects.all()
+    user = request.user
+    todolists = user.todolist_set.all()
 
     context = {
         "user" : request.user,
