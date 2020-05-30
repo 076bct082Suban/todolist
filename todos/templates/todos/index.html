@@ -1,31 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'todos/style.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'todos/script.js' %}"> -->
+    <script type="text/javascript" src="{% static 'todos/script.js' %}"></script>
     <title>Home</title>
 </head>
 <body>
-    {{user.username}}
-    <button ><a href="{% url 'users:logout' %}">Logout</a></button>
-    {% for todolist in todolists %}
-        <h1>{{todolist}}</h1>
-        <br>
-        {% for todo in todolist.todo_set.all %}
-            {{todo}}
-        {% endfor %}
-        <form action="">
-            <label for="new_todo">New Todo</label>
-            <input type="text" name="new_todo" id='new_todo'>
-            <button id="new_todo_submit">Add</button>
-        </form>
-        <br>
-    {% endfor %}
-    <form action="">
-        <label for="new_todolist">New Todolist</label>
-        <input type="text" name="new_todolist" id='new_todolist'>
-        <button id="new_todolist_submit">Add</button>
-    </form>
 
+    <button ><a href="{% url 'users:logout' %}">Logout</a></button> -->
+
+    <div id="top-bar">
+        <ul id='top-bar-items'>
+            <li id='brand-name'>Brand name</li>
+            <li id='logout-button' style="float: right;">logout</li>
+            <li id='username' style="float: right;">{{user.username}}</li>
+
+        </ul>
+    </div>
+
+    <br>
+    <div id='todolist-container'>
+    {% for todolist in todolists %}
+        <div class="todolist">
+            <h3>{{todolist}}</h3>
+            <br>
+            <ul>
+            {% for todo in todolist.todo_set.all %}
+                <li> <input type="checkbox" class="todo-checkbox" data-todo-id="{{todo.id}}">{{todo}}</li>
+            {% endfor %}
+            </ul>
+            <form class='add_new_todo' data-todolist_id="{{todolist.id}}">
+                {% csrf_token %}
+                <label for="new_todo">New Todo</label>
+                <input type="text" name="new_todo" class='new_todo'>
+                <button class="new_todo_submit" type="submit">Add</button>
+            </form>
+            <br>
+        </div>
+    {% endfor %}
+        <div class="todolist">
+            <form>
+                <label for="new_todolist">New Todolist</label>
+                <input type="text" name="new_todolist" id='new_todolist'>
+                <button id="new_todolist_submit">Add</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

@@ -14,6 +14,7 @@ def validate_difficulty(value):
 class Todolist(models.Model):
     list_name = models.CharField(max_length=64)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __str__(self):
         return self.list_name
 
