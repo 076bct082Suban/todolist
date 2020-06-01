@@ -56,8 +56,12 @@ def todoCreate(request):
 
     if serializer.is_valid():
         serializer.save()
+        print(serializer.data)
+        return Response(serializer.data)
     
-    return Response(serializer.data)
+    else:
+        print("NOpe")
+        return Response({'message': "You fked up."})
 
 
 @api_view(['POST'])

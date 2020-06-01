@@ -24,7 +24,7 @@ class Todo(models.Model):
     description = models.TextField()
     difficulty = models.IntegerField(validators=[validate_difficulty])
     is_complete = models.BooleanField(default=False)
-    todolist = models.ForeignKey(Todolist, on_delete=models.CASCADE)
+    todolist = models.ForeignKey(Todolist,related_name= "todo_set", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

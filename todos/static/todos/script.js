@@ -31,13 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json', 
-                    'X-CSTFToken': csrftoken
+                    'X-CSRFToken': csrftoken
                 },
-                mode: 'same-origin' ,
                 body: JSON.stringify({
                     "id": 1,
                     "title": new_todo,
-                    "description": "",
+                    "description": new_todo,
                     "difficulty": 1,
                     "is_complete": false,
                     "todolist": todolist_id
@@ -45,6 +44,30 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             ).then(function(response){
                 console.log(response)
+                
+                const template = Handlebars.compile(document.querySelector('#new_todo_template').innerHTML);
+                const content = template({'id': "idk", 'todo': new_todo});
+                console.log(content)
+                document.querySelector(`#todolist_${todolist_id}`).innerHTML += content;
+
+                document.querySelectorAll(".add_new_todo").forEach(form => {
+                    form.reset();
+                })
+
+                document.querySelectorAll('.todo-checkbox').forEach(checkbox => {
+                    checkbox.addEventListener('change', (e) => {
+                        // console.log(e)
+                        console.log(e.target.dataset.todoid)
+                        if(checkbox.checked){
+                            console.log("checked")
+                        }else{
+                            console.log('unchecked')
+                        }
+                    })
+            
+                })
+            
+                
             })
             return false
         }
@@ -52,7 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll('.todo-checkbox').forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
-
+            // console.log(e)
+            console.log(e.target.dataset.todoid)
             if(checkbox.checked){
                 console.log("checked")
             }else{

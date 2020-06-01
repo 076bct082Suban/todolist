@@ -7,8 +7,9 @@ class TodoSerializers(serializers.ModelSerializer):
         fields = "__all__"
 
 class TodoListsSerializers(serializers.ModelSerializer):
-    
+    todo_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         model = Todolist
-        fields = "__all__"
+        # fields = "__all__"
+        fields = ["id", "list_name", "user", "todo_set"]
         
